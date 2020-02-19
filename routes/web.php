@@ -18,6 +18,27 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+
+   return $request->user();
+
+});
+
+Route::post('login', 'Api\ApiController@login');
+
+Route::post('register', 'Api\ApiController@register');
+
+Route::group(['middleware' => 'auth:api'], function(){
+
+Route::get('get-details', 'Api\ApiController@getDetails');
+
+});
+
+
+
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {

@@ -18,10 +18,11 @@ class CreateUsersTable extends Migration
             $table->bigInteger('identity_Number');
             $table->string('name');
             $table->string('surname');
-            $table->string('user_type');
+            $table->string('user_type')->default('admin');
             $table->year('birthdate');
-            $table->string('phone')->unique();
-            $table->string('email')->unique();
+            $table->string('phone')->nullable();
+            $table->string('email');
+            //$table->string('api_token', 60)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

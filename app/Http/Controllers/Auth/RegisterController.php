@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Str;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -54,6 +55,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
             'identity_Number' => ['required', 'string', 'max:11', 'min:11'],
             'birthdate' => ['required', 'string', 'max:4', 'min:4'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -99,6 +101,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
+            'email' => $data['email'],
+            //'api_token' => Str::random(60),
             'identity_Number' => $data['identity_Number'],
             'birthdate' => $data['birthdate'],
             'password' => Hash::make($data['password']),
